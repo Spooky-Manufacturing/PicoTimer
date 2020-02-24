@@ -21,5 +21,3 @@ P2 = 2.998mm + P1
 
 So, to introduce a 10 picosecond delay you only need to add 2.998mm to the optical path, this is fairly easy to do, even hand-cutting fiber-optics will net you a more accurate timing system than anything you could make with discrete components. Plus it's cheap! A beamsplitter can be purchased for as little as $4 (you don't need a special one, any will do just fine). And what if one of your circuits is an absurd distance from another one? That's perfectly fine, you simply increase the optical distance by coiling a fiber-optic line the length of P1 + 2.998mm, the exact coil length if you want to know will be:
 Coil_length = (P1+2.998mm) - P2
-
-# Software:
