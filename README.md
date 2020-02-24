@@ -1,6 +1,8 @@
 # PicoTimer
 PicoTimer is an open-source and open-hardware project that enables you to trigger multiple circuits with up to pico-second or greater accuracy!
 
+![Example Circuit](https://github.com/Spooky-Manufacturing/PicoTimer/blob/master/img/picotimer.png)
+
 ## Motivation
 
 One of the biggest challenges to building scalable photonic quatum computers is handling the inevitable optical path differences, nowhere is this more important than in synchronizing the ancilliary photons in our controlled gates. Unfortunately, a ready-made solution to this problem does not exist, and so we've had to improvise. Achieving pico-second timing is an extremely difficult task to accomplish, modern processors which can achieve clock cycles above 1GHz are *in theory* able to produce a 1 picosecond delay, but in an electrical circuit which may have varying wire-lengths and wave propagation characteristics, actually building a timer to take into account all of these factors is for the most part out of reach of the average person's capabilities.
@@ -38,46 +40,18 @@ Previously in this document I used the term delay to denote the 2nd, more colloq
 
    Variables: distance = d, time=t, speed=s, speed of light = c, delay = Dn, differential delay = iD, path length = Pn
 
-$$
+````
 d = t*s
-$$
-
-$$
 d=t*c
-$$
-
-$$
 P1 = t * c
-$$
-
-$$
 P1 = D1 * c
-$$
-
-$$
 P1/c = D1
-$$
-
-$$
 P2 = t*c
-$$
-
-$$
 P2 = D2 * c
-$$
-
-$$
 P2/c = D2
-$$
-
-$$
 iD = |D1 - D2|
-$$
-
-$$
 iD = |P1/c - P2/c|
-$$
-
+````
 
 
 This proves the differential delay is equal to the absolute value of the length of optical path 1 divided by the speed of light minus the length of the optical path 2 divided by the speed of light.
@@ -87,21 +61,21 @@ This proves the differential delay is equal to the absolute value of the length 
 
 
 Now that we've proven we can create a delay between two components using the speed of light, we can plug in some numbers to figure out what sort of delays we can introduce using the formula we created earlier:
-$$
-iD = |P1/c - P2/c|
-$$
-For instance, let's say you wanted a 10 picosecond delay, plugging this in gives us:
-$$
-10ps = |P1/c - P2/c|
-$$
-Now we multiply each side by c the constant for speed of light (in mm) and we get (approximately):
-$$
-2.998mm = |P1 - P2|
-$$
-So, to introduce a 10 picosecond delay you only need to make the optical path of the component you want to delay 2.998mm larger than the other. The easiest setup is to just place the components exactly that distance away from one another, a more sophisticated setup might use a col
 
-This is fairly easy to do, even hand-cutting fiber-optics will net you a more accurate timing system than anything you could make with discrete components. Plus it's cheap! A beamsplitter can be purchased for as little as $4 (you don't need a special one, any will do just fine). And what if one of your circuits is an absurd distance from another one? That's perfectly fine, you simply increase the optical distance by coiling a fiber-optic line the length of P1 + 2.998mm, the exact coil length if you want to know will be:
-Coil_length = (P1+2.998mm) - P2.
+    iD = |P1/c - P2/c|
+
+For instance, let's say you wanted a 10 picosecond delay, plugging this in gives us:
+
+    10ps = |P1/c - P2/c|
+
+Now we multiply each side by c the constant for speed of light (in mm) and we get (approximately):
+
+    2.998mm = |P1 - P2|
+    
+So, to introduce a 10 picosecond delay you only need to make the optical path of the component you want to delay 2.998mm larger than the other. The easiest setup is to just place the components exactly that distance away from one another, a more sophisticated setup might use a fiber-optic coil, even hand-cutting fiber-optics will net you a more accurate timing system than anything you could make with discrete components. Plus it's cheap! A beamsplitter can be purchased for as little as $4 (you don't need a special one, any will do just fine). And what if one of your circuits is an absurd distance from another one? That's perfectly fine, you simply increase the optical distance by coiling a fiber-optic line the length of P1 + 2.998mm, the exact coil length if you want to know will be:
+
+    Coil_length = (P1+2.998mm) - P2.
 
 Here is a quick example of how we are using PicoTimer to implement an optical quantum circuit:
 
+![Example Circuit](https://github.com/Spooky-Manufacturing/PicoTimer/blob/master/img/cx_prototype.png)
